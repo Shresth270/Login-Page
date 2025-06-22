@@ -1,12 +1,12 @@
-const express = require('express')
-const collection = require('./db')
-const app = express()
+const express = require('express');
+const collection = require('./db');
+const app = express();
 const port = 3000
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: false }));
-app.use(express.json())
+app.use(express.json());
 
 app.get('/login', (req, res) => {
   res.render('login')
@@ -20,7 +20,7 @@ app.post('/signup', async (req, res) => {
 
   const check = await collection.findOne({ name: data.name });
   if (check) {
-    res.render("signuperror")
+    res.render("signuperror");
   }
   else {
     await collection.insertMany([data])
